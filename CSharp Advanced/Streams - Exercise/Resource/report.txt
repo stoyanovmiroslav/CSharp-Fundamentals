@@ -1,0 +1,22 @@
+.mp4
+--Part-4.mp4 - 1429.504kb
+--Part-0.mp4 - 1433.6kb
+--Part-1.mp4 - 1433.6kb
+--Part-2.mp4 - 1433.6kb
+--Part-3.mp4 - 1433.6kb
+--sliceMe.mp4 - 7164.754kb
+.gz
+--Part-4.mp4.gz - 1414.629kb
+--Part-2.mp4.gz - 1430.458kb
+--Part-3.mp4.gz - 1430.531kb
+--Part-1.mp4.gz - 1433.157kb
+.txt
+--words.txt - 0.019kb
+--result.txt - 0.03kb
+--text.txt - 0.124kb
+--report.txt - 0.471kb
+.html
+--info.html - 0.156kb
+--index.html - 0.266kb
+.png
+--newCopyMe.png - 9.355kb
