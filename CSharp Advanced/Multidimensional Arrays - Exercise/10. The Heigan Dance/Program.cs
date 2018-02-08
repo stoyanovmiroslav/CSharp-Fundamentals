@@ -7,9 +7,9 @@ namespace _10._The_Heigan_Dance
 {
     class Program
     {
-        static private int playerPoints;
+        static private double playerPoints;
         static private double heiganPoints;
-        static private int leftCloudPoint;
+        static private double leftCloudPoint;
         static private int playerRow;
         static private int playerColl;
 
@@ -175,8 +175,8 @@ namespace _10._The_Heigan_Dance
 
         private static void Damage(string spell, bool escape)
         {
-            int spellCloud = 3500;
-            int eruptionCloud = 6000;
+            double spellCloud = 3500;
+            double eruptionCloud = 6000;
 
             if (leftCloudPoint > 0)
             {
