@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _01._Define_a_Class_Person
+namespace _12.Google
 {
     class Program
     {
