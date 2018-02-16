@@ -69,14 +69,14 @@ class Program
 
         if (Char.IsLetter(personTreeInput[0]))
         {
-            string personInfo = FindPersonInfo(queue, personTreeInput, "birthday");
+            string personInfo = FindFamilyMemberInfo(queue, personTreeInput, "birthday");
             string[] splitPersonInfo = personInfo.Split();
             name = personTreeInput;
             birthday = splitPersonInfo[2];
         }
         else
         {
-            string personInfo = FindPersonInfo(queue, personTreeInput, "name");
+            string personInfo = FindFamilyMemberInfo(queue, personTreeInput, "name");
             string[] splitPersonInfo = personInfo.Split();
             name = $"{splitPersonInfo[0]} {splitPersonInfo[1]}";
             birthday = personTreeInput;
@@ -93,14 +93,14 @@ class Program
         if (Char.IsLetter(splitLine[0][0]))
         {
             currentName = splitLine[0];
-            string childrenInfo = FindPersonInfo(queue, currentName, "birthday");
+            string childrenInfo = FindFamilyMemberInfo(queue, currentName, "birthday");
             string[] splitchildrenInfo = childrenInfo.Split();
             currentBirthday = splitchildrenInfo[2];
         }
         else
         {
             currentBirthday = splitLine[0];
-            string childrenInfo = FindPersonInfo(queue, currentBirthday, "name");
+            string childrenInfo = FindFamilyMemberInfo(queue, currentBirthday, "name");
             string[] splitchildrenInfo = childrenInfo.Split();
             currentName = $"{splitchildrenInfo[0]} {splitchildrenInfo[1]}";
         }
@@ -115,14 +115,14 @@ class Program
         if (Char.IsLetter(splitLine[1][0]))
         {
             currentName = splitLine[1];
-            string childrenInfo = FindPersonInfo(queue, currentName, "birthday");
+            string childrenInfo = FindFamilyMemberInfo(queue, currentName, "birthday");
             string[] splitChildrenInfo = childrenInfo.Split();
             currentBirthday = splitChildrenInfo[2];
         }
         else
         {
             currentBirthday = splitLine[1];
-            string childrenInfo = FindPersonInfo(queue, currentBirthday, "name");
+            string childrenInfo = FindFamilyMemberInfo(queue, currentBirthday, "name");
             string[] splitChildrenInfo = childrenInfo.Split();
             currentName = $"{splitChildrenInfo[0]} {splitChildrenInfo[1]}";
         }
@@ -131,7 +131,7 @@ class Program
         tree.Childrens.Add(children);
     }
 
-    private static string FindPersonInfo(Queue<string> queue, string wantedInfo, string neededInfo)
+    private static string FindFamilyMemberInfo(Queue<string> queue, string wantedInfo, string neededInfo)
     {
         bool personIsFind = false;
         string line = "";
