@@ -15,6 +15,7 @@ namespace _09.CollectionHierarchy
         {
             int index = 0;
             collection.Insert(index, element);
+            this.CurrentIndex++;
             return index;
         }
 
@@ -22,7 +23,7 @@ namespace _09.CollectionHierarchy
         {
             string element = collection[0];
             collection.RemoveAt(0);
-            this.CurrentIndex = 0;
+            this.CurrentIndex--;
             return element;
         }
     }
