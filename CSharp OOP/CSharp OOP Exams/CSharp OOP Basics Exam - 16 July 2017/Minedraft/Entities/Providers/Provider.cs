@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 public abstract class Provider : Minedraft
 {
     private double energyOutput;
 
-    public Provider(string id, double energyOutput)
+    protected Provider(string id, double energyOutput) 
         : base(id)
     {
         this.EnergyOutput = energyOutput;
@@ -18,9 +19,9 @@ public abstract class Provider : Minedraft
         get { return energyOutput; }
         protected set
         {
-            if (value < 0 || value >= 10000)
+            if (value < 0 || value >= 10_000)
             {
-                throw new ArgumentException($"Provider is not registered, because of it's {nameof(EnergyOutput)}");
+                throw new ArgumentException("EnergyOutput");
             }
             energyOutput = value;
         }
@@ -28,9 +29,10 @@ public abstract class Provider : Minedraft
 
     public override string ToString()
     {
-        var sb = new StringBuilder();
-        sb.AppendLine($"Provider - {this.Id}");
-        sb.AppendLine($"Energy Output: {this.energyOutput}");
-        return sb.ToString().Trim();
+        string type = this.GetType().Name;
+        int index = type.IndexOf("Provider");
+        type = type.Insert(index, " ");
+
+        return $"{type} - {this.Id}{Environment.NewLine}Energy Output: {this.EnergyOutput}";
     }
 }

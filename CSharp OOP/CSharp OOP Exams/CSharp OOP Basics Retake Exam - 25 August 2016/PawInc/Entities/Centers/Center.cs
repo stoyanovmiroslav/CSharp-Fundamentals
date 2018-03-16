@@ -15,7 +15,7 @@ public abstract class Center
         this.Animals = new List<Animal>();
     }
 
-    public int countOfAnimal => this.Animals.Count;
+    public int countOfAnimals => this.Animals.Where(x => x.CleansingStatus == true).Count();
 
     protected List<Animal> Animals
     {
@@ -27,6 +27,11 @@ public abstract class Center
     {
         get { return name; }
         protected set { name = value; }
+    }
+
+    public void AddAnimals(List<Animal> animals)
+    {
+        this.Animals.AddRange(animals);
     }
 
     public void AddAnimal(Animal animal)

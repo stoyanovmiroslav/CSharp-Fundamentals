@@ -55,6 +55,8 @@
     <Compile Include="Entities\Monuments\WaterMonument.cs" />
     <Compile Include="Entities\Nation.cs" />
     <Compile Include="Core\NationsBuilder.cs" />
+    <Compile Include="Factories\BenderFactory.cs" />
+    <Compile Include="Factories\MonumentFactory.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

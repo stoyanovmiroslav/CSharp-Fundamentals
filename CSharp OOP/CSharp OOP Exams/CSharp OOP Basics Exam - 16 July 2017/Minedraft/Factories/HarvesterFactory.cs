@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public static class HarvesterFactory
+public class HarvesterFactory
 {
-    public static Harvester CreateHarvester(List<string> args)
+    public static Harvester CreateHarvest(List<string> arguments)
     {
-        var typeOfHarvester = args[0];
-        var id = args[1];
-        var oreOutput = double.Parse(args[2]);
-        var energyRequirement = double.Parse(args[3]);
+        string type = arguments[0];
+        string id = arguments[1];
+        double oreOutput = double.Parse(arguments[2]);
+        double energyRequirement = double.Parse(arguments[3]);
 
-        switch (typeOfHarvester)
+        switch (type)
         {
             case "Sonic":
-                var sonicFactor = int.Parse(args[4]);
+                int sonicFactor = int.Parse(arguments[4]);
                 return new SonicHarvester(id, oreOutput, energyRequirement, sonicFactor);
             case "Hammer":
                 return new HammerHarvester(id, oreOutput, energyRequirement);

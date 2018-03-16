@@ -42,15 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animals\Animal.cs" />
-    <Compile Include="Animals\Cat.cs" />
-    <Compile Include="Animals\Dog.cs" />
-    <Compile Include="Centers\AdoptionCenter.cs" />
-    <Compile Include="Centers\CastrationCenter.cs" />
-    <Compile Include="Centers\Center.cs" />
-    <Compile Include="Centers\CleansingCenter.cs" />
-    <Compile Include="Controllers\Engine.cs" />
-    <Compile Include="Controllers\PawIncManager.cs" />
+    <Compile Include="Entities\Animals\Animal.cs" />
+    <Compile Include="Entities\Animals\Cat.cs" />
+    <Compile Include="Entities\Animals\Dog.cs" />
+    <Compile Include="Entities\Centers\AdoptionCenter.cs" />
+    <Compile Include="Entities\Centers\CastrationCenter.cs" />
+    <Compile Include="Entities\Centers\Center.cs" />
+    <Compile Include="Entities\Centers\CleansingCenter.cs" />
+    <Compile Include="Core\Engine.cs" />
+    <Compile Include="Core\PawIncManager.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

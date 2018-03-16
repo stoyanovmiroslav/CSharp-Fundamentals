@@ -40,17 +40,17 @@ public class Engine
                 case "SendForCleansing":
                     pawIncManager.SendForCleansing(splitInput[1], splitInput[2]);
                     break;
-                case "SendForCastration":
-                    pawIncManager.SendForCastration(splitInput[1], splitInput[2]);
-                    break;
                 case "Cleanse":
                     pawIncManager.Cleanse(splitInput[1]);
                     break;
-                case "CastrationStatistics":
-                    pawIncManager.CastrationStatistics();
+                case "SendForCastration":
+                    pawIncManager.SendForCastration(splitInput[1], splitInput[2]);
                     break;
                 case "Castrate":
                     pawIncManager.Castrate(splitInput[1]);
+                    break;
+                case "CastrationStatistics":
+                    pawIncManager.CastrationStatistics();
                     break;
                 case "Adopt":
                     pawIncManager.Adopt(splitInput[1]);

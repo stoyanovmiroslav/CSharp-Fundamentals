@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 public abstract class Harvester : Minedraft
 {
- 
     private double oreOutput;
     private double energyRequirement;
 
-    public Harvester(string id, double oreOutput, double energyRequirement) 
+    protected Harvester(string id, double oreOutput, double energyRequirement) 
         : base(id)
     {
         this.OreOutput = oreOutput;
@@ -21,9 +21,9 @@ public abstract class Harvester : Minedraft
         get { return energyRequirement; }
         protected set
         {
-            if (value < 0 || value > 20000)
+            if (value < 0 || value > 20_000)
             {
-                throw new ArgumentException($"Harvester is not registered, because of it's {nameof(EnergyRequirement)}");
+                throw new ArgumentException("EnergyRequirement");
             }
             energyRequirement = value;
         }
@@ -36,7 +36,7 @@ public abstract class Harvester : Minedraft
         {
             if (value < 0)
             {
-                throw new ArgumentException($"Harvester is not registered, because of it's {nameof(OreOutput)}");
+                throw new ArgumentException("OreOutput");
             }
             oreOutput = value;
         }
@@ -44,10 +44,10 @@ public abstract class Harvester : Minedraft
 
     public override string ToString()
     {
-        var sb = new StringBuilder();
-        sb.AppendLine($"Harvester - {this.Id}");
-        sb.AppendLine($"Ore Output: {this.oreOutput}");
-        sb.AppendLine($"Energy Requirement: {this.EnergyRequirement}");
-        return sb.ToString().Trim();
+        string type = this.GetType().Name;
+        int index = type.IndexOf("Harvester");
+        type = type.Insert(index, " ");
+
+        return $"{type} - {this.Id}{Environment.NewLine}Ore Output: {this.OreOutput}{Environment.NewLine}Energy Requirement: {this.EnergyRequirement}";
     }
 }

@@ -17,7 +17,7 @@ public class CleansingCenter : Center
 
     public IReadOnlyDictionary<string, List<Animal>> StoredAnimals => this.storedAnimals as IReadOnlyDictionary<string, List<Animal>>;
 
-    public int AwaitingCleansing => this.Animals.Where(a => a.CleansingStatus == "UNCLEANSED").Count();
+    public int awaitingCleansing => this.Animals.Where(a => a.CleansingStatus == false).Count();
 
     public CleansingCenter(string name)
         : base(name)
@@ -28,7 +28,7 @@ public class CleansingCenter : Center
 
     public void AddAnimals(string adoptionCenterName, List<Animal> animals)
     {
-        if (!this.StoredAnimals.ContainsKey(adoptionCenterName))
+        if (!this.storedAnimals.ContainsKey(adoptionCenterName))
         {
             this.storedAnimals.Add(adoptionCenterName, new List<Animal>());
         }
@@ -43,7 +43,7 @@ public class CleansingCenter : Center
         {
             foreach (var animal in center.Value)
             {
-                animal.CleansingStatus = "CLEANSED";
+                animal.CleansingStatus = true;
             }
         }
     }

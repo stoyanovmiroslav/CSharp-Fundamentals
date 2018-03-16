@@ -33,7 +33,7 @@ public class CastrationCenter : Center
         {
             this.storedAnimals.Add(adoptionCenterName, new List<Animal>());
         }
-        this.StoredAnimals[adoptionCenterName].AddRange(animals);
+        this.storedAnimals[adoptionCenterName].AddRange(animals);
         this.Animals.AddRange(animals);
     }
 }

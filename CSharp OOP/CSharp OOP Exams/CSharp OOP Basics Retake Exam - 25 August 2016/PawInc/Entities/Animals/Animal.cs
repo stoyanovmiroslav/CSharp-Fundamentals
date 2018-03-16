@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 public abstract class Animal
 {
-    private const string defaultCleansingStatus = "UNCLEANSED";
     private string name;
     private int age;
-    private string cleansingStatus;
+    private bool cleansingStatus;
 
     protected Animal(string name, int age)
     {
         this.Name = name;
         this.Age = age;
-        this.CleansingStatus = defaultCleansingStatus;
+        this.CleansingStatus = false;
     }
 
-    public string CleansingStatus
+    public bool CleansingStatus
     {
         get { return cleansingStatus; }
         set { cleansingStatus = value; }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Program
+public class SolarProvider : Provider
 {
-    static void Main(string[] args)
+    public SolarProvider(string id, double energyOutput) 
+        : base(id, energyOutput)
     {
-        Engine engine = new Engine();
-        engine.Run();
     }
 }

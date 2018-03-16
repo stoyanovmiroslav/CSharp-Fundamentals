@@ -58,22 +58,22 @@ public class CarManager
         }
         else if (races[id] is DragRace)
         {
-            var dragRaceWinners = races[id].GetParticipants?.OrderByDescending(x => x.EnginePerformance()).ToList(); /// ?/
+            var dragRaceWinners = races[id].GetParticipants.OrderByDescending(x => x.EnginePerformance()).ToList();
             winners = GetWinners(id, dragRaceWinners, "drag");
         }
         else if (races[id] is DriftRace)
         {
-            var driftRaceWinners = races[id].GetParticipants?.OrderByDescending(x => x.SuspensionPerformance()).ToList(); ///?
+            var driftRaceWinners = races[id].GetParticipants.OrderByDescending(x => x.SuspensionPerformance()).ToList();
             winners = GetWinners(id, driftRaceWinners, "drift");
         }
         else if (races[id] is TimeLimitRace)
         {
-            var timeRaceWinners = races[id].GetParticipants.ToList(); ///?
+            var timeRaceWinners = races[id].GetParticipants.ToList();
             winners = GetTimeParticipant(id, timeRaceWinners, "time");
         }
         else if (races[id] is CircuitRace)
         {
-            var circuitRaceWinners = races[id].GetParticipants.ToList(); ///?
+            var circuitRaceWinners = races[id].GetParticipants.ToList(); 
             winners = GetWinners(id, circuitRaceWinners, "circuit");
         }
         return winners;

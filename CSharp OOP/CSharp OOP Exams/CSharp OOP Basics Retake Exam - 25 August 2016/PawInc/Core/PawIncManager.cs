@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 public class PawIncManager
 {
-    List<AdoptionCenter> adoptionCenters = new List<AdoptionCenter>();
-    List<CleansingCenter> cleansingCenters = new List<CleansingCenter>();
-    List<CastrationCenter> castrationCenters = new List<CastrationCenter>();
+    private List<AdoptionCenter> adoptionCenters;
+    private List<CleansingCenter> cleansingCenters;
+    private List<CastrationCenter> castrationCenters;
+
 
     public PawIncManager()
     {
@@ -62,16 +63,7 @@ public class PawIncManager
 
         if (currentAdoptionCenter != null && currentCastrationCenter != null)
         {
-            currentCastrationCenter.AceptAnimals(adoptionCenterName, currentAdoptionCenter.SendAllAnimals());
-        }
-    }
-
-    public void Adopt(string adoptionCenterName)
-    {
-        var currentAdoptionCenter = adoptionCenters.FirstOrDefault(c => c.Name == adoptionCenterName);
-        if (currentAdoptionCenter != null)
-        {
-            currentAdoptionCenter.AdoptAnimals();
+            currentCastrationCenter.AceptAnimals(adoptionCenterName, currentAdoptionCenter.GetAllAnimals());
         }
     }
 
@@ -93,26 +85,15 @@ public class PawIncManager
         }
     }
 
-    public void CastrationStatistics()
+    public void SendForCleansing(string adoptionCenterName, string cleansingCenterName)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Paw Inc. Regular Castration Statistics")
-                     .AppendLine($"Castration Centers: {castrationCenters.Count}")
-                     .Append("Castrated Animals: ");
+        var currentAdoptionCenter = adoptionCenters.FirstOrDefault(c => c.Name == adoptionCenterName);
+        var currentCleansingCenterName = cleansingCenters.FirstOrDefault(c => c.Name == cleansingCenterName);
 
-        if (castrationCenters.Any(x => x.countOfCastratedAnimals > 0))
+        if (currentAdoptionCenter != null && currentCleansingCenterName != null)
         {
-            foreach (var center in castrationCenters)
-            {
-                stringBuilder.Append(string.Join(", ", center.CastratedAnimals.OrderBy(x => x.Name)));
-            }
+            currentCleansingCenterName.AddAnimals(adoptionCenterName, currentAdoptionCenter.GetUncleansedAnimals());
         }
-        else
-        {
-            stringBuilder.Append("None");
-        }
-
-        Console.WriteLine(stringBuilder.ToString().TrimEnd());
     }
 
     public void Cleanse(string cleansingCenterName)
@@ -134,15 +115,74 @@ public class PawIncManager
         }
     }
 
-    public void SendForCleansing(string adoptionCenterName, string cleansingCenterName)
+    public void Adopt(string adoptionCenterName)
     {
         var currentAdoptionCenter = adoptionCenters.FirstOrDefault(c => c.Name == adoptionCenterName);
-        var currentCleansingCenterName = cleansingCenters.FirstOrDefault(c => c.Name == cleansingCenterName);
-
-        if (currentAdoptionCenter != null && currentCleansingCenterName != null)
+        if (currentAdoptionCenter != null)
         {
-            currentCleansingCenterName.AddAnimals(adoptionCenterName, currentAdoptionCenter.SendAllAnimals());
+            currentAdoptionCenter.AdoptCleansedAnimals();
         }
+    }
+
+    public string CastrationStatistics()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("Paw Inc. Regular Castration Statistics")
+                     .AppendLine($"Castration Centers: {castrationCenters.Count}");
+
+        if (castrationCenters.Any(x => x.countOfCastratedAnimals > 0))
+        {
+            List<Animal> castratedAnimals = GetCastratedAnimals();
+            stringBuilder.AppendLine("Castrated Animals: " + string.Join(", ", castratedAnimals.OrderBy(x => x.Name)));
+        }
+        else
+        {
+            stringBuilder.AppendLine("Castrated Animals: None");
+        }
+
+        return stringBuilder.ToString().TrimEnd();
+    }
+
+    private List<Animal> GetCastratedAnimals()
+    {
+        List<Animal> castratedAnimals = new List<Animal>();
+        foreach (var center in castrationCenters)
+        {
+            if (center.CastratedAnimals.Count > 0)
+            {
+                castratedAnimals.AddRange(center.CastratedAnimals);
+            }
+        }
+
+        return castratedAnimals;
+    }
+
+    private List<Animal> GetCleansedAnimals()
+    {
+        List<Animal> cleansedAnimals = new List<Animal>();
+        foreach (var center in cleansingCenters)
+        {
+            if (center.CleansedAnimals.Count > 0)
+            {
+                cleansedAnimals.AddRange(center.CleansedAnimals);
+            }
+        }
+
+        return cleansedAnimals;
+    }
+
+    private List<Animal> GetAdoptedAnimals()
+    {
+        List<Animal> adoptedAnimals = new List<Animal>();
+        foreach (var center in adoptionCenters)
+        {
+            if (center.AdoptedAnimals.Count > 0)
+            {
+                adoptedAnimals.AddRange(center.AdoptedAnimals);
+            }
+        }
+
+        return adoptedAnimals;
     }
 
     public override string ToString()
@@ -150,39 +190,30 @@ public class PawIncManager
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("Paw Incorporative Regular Statistics")
                      .AppendLine($"Adoption Centers: {adoptionCenters.Count}")
-                     .AppendLine($"Cleansing Centers: {cleansingCenters.Count}")
-                     .Append("Adopted Animals: ");
+                     .AppendLine($"Cleansing Centers: {cleansingCenters.Count}");
 
-        if (adoptionCenters.Any(x => x.AdobdAnimals.Count > 0))
+        if (adoptionCenters.Any(x => x.AdoptedAnimals.Count > 0))
         {
-            foreach (var center in adoptionCenters)
-            {
-                stringBuilder.Append(string.Join(", ", center.AdobdAnimals.OrderBy(x => x.Name)));
-            }
+            List<Animal> adoptedAnimals = GetAdoptedAnimals();
+            stringBuilder.AppendLine("Adopted Animals: " + string.Join(", ", adoptedAnimals.OrderBy(x => x.Name)));
         }
         else
         {
-            stringBuilder.Append("None");
+            stringBuilder.AppendLine("Adopted Animals: None");
         }
-
-        stringBuilder.AppendLine();
-        stringBuilder.Append("Cleansed Animals: ");
 
         if (cleansingCenters.Any(x => x.CleansedAnimals.Count > 0))
         {
-            foreach (var center in cleansingCenters)
-            {
-                stringBuilder.Append(string.Join(", ", center.CleansedAnimals.OrderBy(x => x.Name)));
-            }
+            List<Animal> cleansedAnimals = GetCleansedAnimals();
+            stringBuilder.AppendLine("Cleansed Animals: " + string.Join(", ", cleansedAnimals.OrderBy(x => x.Name)));
         }
         else
         {
-            stringBuilder.Append("None");
+            stringBuilder.AppendLine("Cleansed Animals: None");
         }
 
-        stringBuilder.AppendLine();
-        int adoprionCount = adoptionCenters.Select(x => x.countOfAnimal).Sum();
-        int cleansingCount = cleansingCenters.Select(x => x.AwaitingCleansing).Sum();
+        int adoprionCount = adoptionCenters.Select(x => x.countOfAnimals).Sum();
+        int cleansingCount = cleansingCenters.Select(x => x.awaitingCleansing).Sum();
 
         stringBuilder.AppendLine($"Animals Awaiting Adoption: {adoprionCount}");
         stringBuilder.AppendLine($"Animals Awaiting Cleansing: {cleansingCount}");
