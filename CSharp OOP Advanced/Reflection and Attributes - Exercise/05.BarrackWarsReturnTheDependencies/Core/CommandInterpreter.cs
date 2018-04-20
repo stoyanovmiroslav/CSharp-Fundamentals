@@ -28,7 +28,7 @@ namespace _05.BarrackWarsReturnTheDependencies.Core
 
             object[] injectArgs = fieldsToInject.Select(x => this.serviceProvider.GetService(x.FieldType)).ToArray();
 
-            object[] ctorArgs = new object[] {data}.Concat(injectArgs).ToArray();
+            object[] ctorArgs = new object[] {	}.Concat(injectArgs).ToArray();
 
             IExecutable instance = (IExecutable)Activator.CreateInstance(currentCommand, ctorArgs);
 
